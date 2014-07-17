@@ -15,13 +15,11 @@
  **/
 
 var util = require("util");
-var when = require("when");
 
 var credentials = {};
 var storage = null;
 var credentialsDef = {};
 var redApp = null;
-var querystring = require('querystring');
 var Credentials;
 
 function getCredDef(type) {
