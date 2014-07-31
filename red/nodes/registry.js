@@ -321,6 +321,12 @@ module.exports = {
         return node_types[type];
     },
     getNodeConfigs: getNodeConfigs,
+    clearNodeConfigCache: function() {
+        console.log("clearing cache: ", JSON.stringify([node_config_cache]));
+        node_config_cache = null;
+        node_types = {};
+        node_configs = [];
+    },
     
     loadNode: function(filename) {
         

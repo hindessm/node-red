@@ -150,6 +150,7 @@ describe("getNodeFiles", function() {
             } 
             fs.remove(tempDir, done);
           });
+        require("../../../red/nodes/registry").clearNodeConfigCache();
     });
     
     it('loads additional node files from specified external nodesDir',function(done) {
