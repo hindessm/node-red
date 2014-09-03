@@ -961,6 +961,11 @@ i.spinner {
     background: url(spin.svg) no-repeat 50% 50%;
     background-size: contain
 }
-    
-    
 
+svg text.node_icon_fa_text {
+  display: inline-block;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+}

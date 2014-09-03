@@ -1044,8 +1044,8 @@ RED.view = (function() {
                    //node.append("rect").attr("class", "node-gradient-bottom").attr("rx", 6).attr("ry", 6).attr("height",30).attr("stroke","none").attr("fill","url(#gradient-bottom)").style("pointer-events","none");
 
                     if (d._def.icon) {
-                        
-                        var icon_group = node.append("g")
+
+                        var icon_group = node.append("svg:g")
                             .attr("class","node_icon_group")
                             .attr("x",0).attr("y",0);
                         
@@ -1058,13 +1058,21 @@ RED.view = (function() {
                             .attr("fill-opacity","0.05")
                             .attr("height",function(d){return Math.min(50,d.h-4);});
                             
-                        var icon = icon_group.append("image")
-                            .attr("xlink:href","icons/"+d._def.icon)
-                            .attr("class","node_icon")
-                            .attr("x",0)
-                            .attr("width","30")
-                            .attr("height","30");
-                            
+                        var icon;
+                        if (d._def.icon instanceof Array) {
+                            icon = icon_group.append("svg:g")
+                                .attr("x",0).attr("y",0);
+                            var faIcon = icon.append("svg:text")
+                                .attr("class","node_icon_fa_text")
+                                .attr("x",0).attr("y",0);
+                        } else {
+                            icon = icon_group.append("image")
+                                .attr("xlink:href","icons/"+d._def.icon)
+                                .attr("class","node_icon")
+                                .attr("x",0)
+                                .attr("width","30")
+                                .attr("height","30");
+                        }
                         var icon_shade_border = icon_group.append("path")
                             .attr("d",function(d) { return "M 30 1 l 0 "+(d.h-2)})
                             .attr("class","node_icon_shade_border")
@@ -1211,6 +1219,8 @@ RED.view = (function() {
                                 (d._def.align?' node_label_'+d._def.align:'')+
                                 (d._def.label?' '+(typeof d._def.labelStyle == "function" ? d._def.labelStyle.call(d):d._def.labelStyle):'') ;
                         });
+                        thisNode.selectAll('text.node_icon_fa_text').text(d._def.icon[1]);
+
                         thisNode.selectAll(".node_tools").attr("x",function(d){return d.w-35;}).attr("y",function(d){return d.h-20;});
 
                         thisNode.selectAll(".node_changed")

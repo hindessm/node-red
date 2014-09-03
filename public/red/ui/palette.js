@@ -51,16 +51,25 @@ RED.palette = (function() {
             
             var label = /^(.*?)([ -]in|[ -]out)?$/.exec(nt)[1];
             
-            d.innerHTML = '<div class="palette_label">'+label+"</div>";
             d.className="palette_node";
             if (def.icon) {
-                d.style.backgroundImage = "url(icons/"+def.icon+")";
-                if (def.align == "right") {
-                    d.style.backgroundPosition = "95% 50%";
-                } else if (def.inputs > 0) {
-                    d.style.backgroundPosition = "10% 50%";
+                if (def.icon instanceof Array) {
+                    var iconHTML = '<i class="fa '+def.icon[0]+'"></i>';
+                    if (def.align == "right") {
+                        label = label + iconHTML;
+                    } else {
+                        label = iconHTML + label;
+                    }
+                } else {
+                    d.style.backgroundImage = "url(icons/"+def.icon+")";
+                    if (def.align == "right") {
+                        d.style.backgroundPosition = "95% 50%";
+                    } else if (def.inputs > 0) {
+                        d.style.backgroundPosition = "10% 50%";
+                    }
                 }
             }
+            d.innerHTML = '<div class="palette_label">'+label+"</div>";
             
             d.style.backgroundColor = def.color;
             
